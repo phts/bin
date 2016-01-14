@@ -11,11 +11,12 @@ fi
 
 MOUSE_ID=$1
 KEYBOARD_ID=$2
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
 while true;
 do
   if [[ ! -z `ps cax | grep TeamViewer_Desk` ]]; then
-    ./teamviewer-disable-user-input.sh $MOUSE_ID $KEYBOARD_ID
+    $SCRIPT_DIR/teamviewer-disable-user-input.sh $MOUSE_ID $KEYBOARD_ID
   fi
   sleep 3
 done
