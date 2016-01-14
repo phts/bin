@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: ${0##*/} <MOUSE_ID> <KEYBOARD_ID>"
+if [ "$#" -eq 0 ]; then
+  echo "Usage: ${0##*/} DEVICE_ID..."
   echo "Run teamviewer-disable-user-input.sh on each TeamViewer session."
   echo "It requires root privileges."
   echo
@@ -9,14 +9,12 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
-MOUSE_ID=$1
-KEYBOARD_ID=$2
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
 while true;
 do
   if [[ ! -z `ps cax | grep TeamViewer_Desk` ]]; then
-    $SCRIPT_DIR/teamviewer-disable-user-input.sh $MOUSE_ID $KEYBOARD_ID
+    $SCRIPT_DIR/teamviewer-disable-user-input.sh "$@"
   fi
   sleep 3
 done
