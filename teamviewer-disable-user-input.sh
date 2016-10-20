@@ -15,17 +15,21 @@ function turn_off_monitors {
   done
 }
 
-function turn_on_monitors {
-  xrandr | grep " connected " | awk '{ print$1 }' | while read monitor;
+function turn_off_devices {
+  for id in "$@"
   do
-    xrandr --output $monitor --brightness 1
+    xinput --set-prop $id "Device Enabled" "0"
   done
 }
 
-for id in "$@"
-do
-  xinput --set-prop $id "Device Enabled" "0"
-done
+function recover {
+  MYDIR="$(dirname "$(realpath "$0")")"
+  $MYDIR/teamviewer-recover-devices.sh "$@"
+}
+
+trap "recover $@; exit" SIGHUP SIGINT SIGTERM
+
+turn_off_devices "$@"
 turn_off_monitors
 
 while true;
@@ -37,8 +41,4 @@ do
 done
 
 xflock4
-turn_on_monitors
-for id in "$@"
-do
-  xinput --set-prop $id "Device Enabled" "1"
-done
+recover "$@"
