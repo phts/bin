@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -eq 0 ]; then
-  echo "Usage: ${0##*/} DEVICE_ID..."
+  echo "Usage: ${0##*/} [--no-devices|DEVICE_ID...]"
   echo "Disable user input and turn off monitor while TeamViewer session is running. This is a missing feature of TeamViewer for Linux since only TeamViewer for Windows has it."
   echo
   echo "Hint: use \`xinput list\` to get ids of your devices."
@@ -29,7 +29,9 @@ function recover {
 
 trap "recover $@; exit" SIGHUP SIGINT SIGTERM
 
-turn_off_devices "$@"
+if [ "--no-devices" == "$1" ]; then
+  turn_off_devices "$@"
+fi
 turn_off_monitors
 
 while true;
@@ -41,4 +43,6 @@ do
 done
 
 xflock4
-recover "$@"
+if [ "--no-devices" == "$1" ]; then
+  recover "$@"
+fi

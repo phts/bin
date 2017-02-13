@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -eq 0 ]; then
-  echo "Usage: ${0##*/} DEVICE_ID..."
+  echo "Usage: ${0##*/} [--no-devices|DEVICE_ID...]"
   echo "Run teamviewer-disable-user-input.sh on each TeamViewer session."
   echo
   echo "Hint: use \`xinput list\` to get ids of your devices."
