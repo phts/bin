@@ -29,7 +29,7 @@ function recover {
 
 trap "recover $@; exit" SIGHUP SIGINT SIGTERM
 
-if [ "--no-devices" == "$1" ]; then
+if [ "$1" != "--no-devices" ]; then
   turn_off_devices "$@"
 fi
 turn_off_monitors
@@ -43,6 +43,4 @@ do
 done
 
 xflock4
-if [ "--no-devices" == "$1" ]; then
-  recover "$@"
-fi
+recover "$@"

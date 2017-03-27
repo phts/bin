@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$#" -eq 0 ]; then
-  echo "Usage: ${0##*/} DEVICE_ID..."
+  echo "Usage: ${0##*/} [--no-devices|DEVICE_ID...]"
   echo "Recover monitor and device states after interruption of teamviewer-disable-user-input.sh script."
   echo
   echo "Hint: use \`xinput list\` to get ids of your devices."
@@ -23,4 +23,7 @@ function turn_on_devices {
 }
 
 turn_on_monitors
-turn_on_devices "$@"
+
+if [ "$1" != "--no-devices" ]; then
+  turn_on_devices "$@"
+fi
