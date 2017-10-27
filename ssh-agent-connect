@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# This script should be called via `source` command: `source ssh-agent-connect`
+# to be able to export variables from ssh-agent.pid file created by `ssh-agent-start`
+# to a global environemt.
+
+if [ -f ~/ssh-agent.pid ]; then
+  eval `cat ~/ssh-agent.pid`
+else
+  echo "File ~/ssh-agent.pid is not found. Probably ssh-agent is not running. Use ssh-agent-start."
+fi

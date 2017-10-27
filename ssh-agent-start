@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# This script should be run once. It will start ssh-agent.exe and create
+# ssh-agent.pid file. And then `ssh-agent-connect` should be called in every
+# git bash console to export variables from ssh-agent.pid file to the system.
+
+ssh-agent -s > ~/ssh-agent.pid
