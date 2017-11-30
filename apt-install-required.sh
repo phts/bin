@@ -1,12 +1,12 @@
 #!/bin/bash
 
-sudo apt-get install git git-gui gitk
-sudo apt-get install ruby
-sudo apt-get install mc
+apt-get install git git-gui gitk
+apt-get install ruby
+apt-get install mc
 
 # Volume control
-sudo apt-get install pavucontrol
+apt-get install pavucontrol
 
 # add-apt-repository
-sudo apt-get install software-properties-common
+apt-get install software-properties-common
 

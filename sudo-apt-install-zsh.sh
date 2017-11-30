@@ -6,9 +6,8 @@ mkdir -p ~/.zsh
 cd ~/.zsh
 git clone https://github.com/olivierverdier/zsh-git-prompt.git git-prompt
 
-if [ -e ~/.zshrc ]; then
-
-  cat > ~/.zshrc <<EOL
+echo "Creating .zshrc file"
+cat > ~/.zshrc <<EOL
 autoload -U compinit promptinit
 compinit
 promptinit
@@ -18,8 +17,6 @@ PROMPT='
 %{\$fg[green]%}%n@%m%{\$reset_color%} %{\$fg[yellow]%}%~%{\$reset_color%} \$(git_super_status)
 \$ '
 EOL
-
-fi
 
 # make zsh default shell
 chsh -s $(which zsh)
