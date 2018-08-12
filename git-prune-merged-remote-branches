@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# https://gist.github.com/schacon/942899
+
+MAIN_BRANCH=master
+REMOTE=origin
+IGNORE_BRANCHES="$MAIN_BRANCH"
+
+function print_merged_branches() {
+  git branch -r --merged $REMOTE/$MAIN_BRANCH | grep $REMOTE | egrep -v ">|$IGNORE_BRANCHES" | cut -d/ -f2-
+}
+
+if [ "$1" == '--delete' ]; then
+  print_merged_branches | xargs git push origin --delete
+  exit
+fi
+
+echo "Branches are merged into $REMOTE/$MAIN_BRANCH:"
+print_merged_branches
+echo
+echo "Rerun this command with --delete flag to remove them from $REMOTE."
+

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# https://stackoverflow.com/a/6127884/2462524
+
+MAIN_BRANCH=master
+IGNORE_BRANCHES="$MAIN_BRANCH"
+
+git branch --merged | egrep -v "(^\*|$IGNORE_BRANCHES)" | xargs git branch -d
