@@ -9,7 +9,7 @@ function print_merged_branches() {
   git branch -r --merged $REMOTE/$MAIN_BRANCH | grep $REMOTE | egrep -v ">|$IGNORE_BRANCHES" | cut -d/ -f2-
 }
 
-if [ "$1" == '--delete' ]; then
+if [ "$1" == '-f' ]; then
   print_merged_branches | xargs git push origin --delete
   exit
 fi
@@ -17,5 +17,4 @@ fi
 echo "Branches are merged into $REMOTE/$MAIN_BRANCH:"
 print_merged_branches
 echo
-echo "Rerun this command with --delete flag to remove them from $REMOTE."
-
+echo "Rerun this command with -f flag to remove them from $REMOTE."
