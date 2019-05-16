@@ -4,4 +4,9 @@
 # ssh-agent.pid file. And then `ssh-agent-connect` should be called in every
 # git bash console to export variables from ssh-agent.pid file to the system.
 
+SSH_AGENT_STARTED=$(ps | grep ssh-agent)
+if [ -n "$SSH_AGENT_STARTED" ]; then
+  exit 1
+fi
+
 ssh-agent -s > ~/ssh-agent.pid
